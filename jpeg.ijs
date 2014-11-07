@@ -204,7 +204,7 @@ quality=. <. 100 <. 0 >. (0>quality){quality,75
 dat=. y
 
 if. -.if3 dat do.
-  dat=. 256 256 256 #:"1 0 dat
+  dat=. 256 256 256 #:"1 0 alpha17 dat
 end.
 
 if. 1> <./sampH,sampV do.
@@ -576,6 +576,7 @@ AhAl=. a.i.(p+3+2*Ns){ibuf
 
 Ns;Sc;Ss;Se;AhAl
 )
+alpha23_z_=: (23 b.) & (0 (26 b.) 16bffffff)
 if3=: 3 : 0
 (3=#$y) *. 3={:$y
 )
