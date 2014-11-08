@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 Utilities for *.jpg files
 )
 
-VERSION=: '1.0.1'
+VERSION=: '1.0.2'
 
 RELEASE=: 'j803'
 
