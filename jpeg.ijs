@@ -271,7 +271,7 @@ end.
 header=. 16bff, tagSOI
 header=. header, (16bff,tagAPP0), addlength (a.i.'JFIF'),0, 1 2 0 100 100 0 0
 header=. header, (16bff,tagDQT), addlength (0, jpegNaturalOrder{,qy), (1, jpegNaturalOrder{,qc)
-header=. header, (16bff,tagSOF0), addlength 8, (256 256#:imageHeight), (256 256#:imageWidth),imageComponent, , imageComponent{. |:3 3$1 2 3,(16b11 16b11,~ 16 16#.sampH,sampV),0 1 1
+header=. header, (16bff,tagSOF0), addlength 8, (256 256#:imageHeight), (256 256#:imageWidth),imageComponent, , imageComponent{. |:3 3$1 2 3,(16b11 16b11,~ 16#.sampH,sampV),0 1 1
 header=. header, (16bff,tagDHT), addlength 16b0, bits_dc_luminance,val_dc_luminance, 16b1, bits_dc_chrominance, val_dc_chrominance, 1bf10, bits_ac_luminance,val_ac_luminance, 16b11, bits_ac_chrominance, val_ac_chrominance
 header=. header, (16bff,tagSOS), addlength imageComponent, 63 0 0,~ ,imageComponent{. _2]\ 1 16b0 2 16b11 3 16b11
 a.{~ header, (16bff,tagEOI),~ bitStream
@@ -466,7 +466,7 @@ if. 1=imageComponent do.
 else.
   dat=. 0|: ('Y'~),('Cb'~),:('Cr'~)
   RGBM=. 3 3 $ 1 0 1.4075 1 _0.3455 _0.7169 1 1.779 0
-  dat=. ([: <. 255 <. 0 >. RGBM"_ (+/ . *) ])"1 [ 0 _128 _128 +"1 dat
+  dat=. 256 #. ([: <. 255 <. 0 >. RGBM"_ (+/ . *) ])"1 [ 0 _128 _128 +"1 dat
 end.
 imageHieght{. imageWidth{."_1 dat
 )
@@ -583,7 +583,7 @@ if3=: 3 : 0
 (3=#$y) *. 3={:$y
 )
 
-u16be=: (256 256&#.)@(a.&i.)
+u16be=: (256&#.)@(a.&i.)
 
 isJpeg=: 3 : 0
 *./ 0 1 2 3 6 7 8 9 10 { 255 216 255 224 _1 _1 74 70 73 70 0 = a.&i.^:(2=3!:0) 11{.y
