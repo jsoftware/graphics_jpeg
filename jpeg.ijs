@@ -604,9 +604,6 @@ AhAl=. a.i.(p+3+2*Ns){ibuf
 
 Ns;Sc;Ss;Se;AhAl
 )
-setalpha_z_=: 16bff&$: : (4 : 0)
-((_32&(34 b.))^:IF64 _8 (32 b.) x)&(23 b.) 16bffffff (17 b.) y
-)
 if3=: 3 : 0
 (3=#$y) *. 3={:$y
 )
