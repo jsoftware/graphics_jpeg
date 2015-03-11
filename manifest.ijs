@@ -6,9 +6,9 @@ DESCRIPTION=: 0 : 0
 Utilities for *.jpg files
 )
 
-VERSION=: '1.0.4'
+VERSION=: '1.0.5'
 
-RELEASE=: 'j803'
+RELEASE=: 'j803 j804'
 
 FILES=: 0 : 0
 jpeg.ijs
