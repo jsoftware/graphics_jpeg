@@ -1,7 +1,7 @@
 coclass 'jjpeg'
 
 3 : 0''
-if. 0~: <'USEQTJPEG' do.
+if. 0~: 4!:0<'USEQTJPEG' do.
   if. IFQT do.
     USEQTJPEG=: 1
   elseif. -. IFIOS +. ((UNAME-:'Android') > IFQT) +. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) do.
