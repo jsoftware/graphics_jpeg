@@ -19,6 +19,7 @@ EMPTY
 )
 
 tagAPP0=: 16be0
+tagAPP1=: 16be1
 tagCOM=: 16bfe
 tagDHT=: 16bc4
 tagDQT=: 16bdb
@@ -382,6 +383,7 @@ while. (#ibuf) > p do.
   end.
   select. t
   case. tagAPP0 do. ''
+  case. tagAPP1 do. ''
   case. tagDQT do. decodeDQT 2+p
   case. tagSOF0 do.
     a=. decodeSOF0 2+p
@@ -611,7 +613,7 @@ if3=: 3 : 0
 u16be=: (256&#.)@(a.&i.)
 
 isJpeg=: 3 : 0
-*./ 0 1 2 3 6 7 8 9 10 { 255 216 255 224 _1 _1 74 70 73 70 0 = a.&i.^:(2=3!:0) 11{.y
++./ (255 216 255 224 74 70 73 70 0,:255 216 255 225 69 120 105 102 0)-:("1) 0 1 2 3 6 7 8 9 10 { a.&i.^:(2=3!:0) 11{.y
 )
 
 addlength=: 3 : 0
