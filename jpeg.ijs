@@ -4,7 +4,7 @@ coclass 'jjpeg'
 if. 0~: 4!:0<'USEQTJPEG' do.
   if. IFQT do.
     USEQTJPEG=: 1
-  elseif. -. IFIOS +. ((UNAME-:'Android') > IFQT) +. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) do.
+  elseif. -. IFIOS +. IFJA +. ((UNAME-:'Android') > IFQT) +. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) do.
     if. 0 < #1!:0 jpath '~addons/ide/qt/qt.ijs' do.
       require '~addons/ide/qt/qt.ijs'
       USEQTJPEG=: 1
@@ -14,6 +14,9 @@ if. 0~: 4!:0<'USEQTJPEG' do.
   elseif. do.
     USEQTJPEG=: 0
   end.
+end.
+if. 0~: 4!:0<'USEJAJPEG' do.
+  USEJAJPEG=: IFJA
 end.
 EMPTY
 )
@@ -214,7 +217,9 @@ dat=. x
 
 if. USEQTJPEG do.
   dat writeimg_jqtide_ (>file);'jpeg';'quality';(0>quality){quality,75
-else.
+elseif. USEJAJPEG do.
+  dat writeimg_ja_ (>file);'jpeg';'quality';(0>quality){quality,75
+elseif. do.
   (boxopen file) 1!:2~ (quality;subsampling) encodejpeg dat
 end.
 ''
@@ -355,6 +360,11 @@ readjpeg=: 3 : 0
 if. USEQTJPEG do.
   if. 0=# dat=. readimg_jqtide_ y do.
     'Qt cannot read JPEG file' return.
+  end.
+  0&setalpha dat return.
+elseif. USEJAJPEG do.
+  if. 0=# dat=. readimg_ja_ y do.
+    'jandroid cannot read JPEG file' return.
   end.
   0&setalpha dat return.
 end.
