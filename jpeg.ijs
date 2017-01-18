@@ -1,5 +1,6 @@
 coclass 'jjpeg'
 
+IFJNET=: (IFJNET"_)^:(0=4!:0<'IFJNET')0
 3 : 0''
 if. 0~: 4!:0<'USEQTJPEG' do.
   if. IFQT do.
@@ -17,6 +18,9 @@ if. 0~: 4!:0<'USEQTJPEG' do.
 end.
 if. 0~: 4!:0<'USEJAJPEG' do.
   USEJAJPEG=: IFJA
+end.
+if. 0~: 4!:0<'USEJNJPEG' do.
+  USEJNJPEG=: IFJNET
 end.
 EMPTY
 )
@@ -218,7 +222,13 @@ dat=. x
 if. USEQTJPEG do.
   dat writeimg_jqtide_ (>file);'jpeg';'quality';(0>quality){quality,75
 elseif. USEJAJPEG do.
-  dat writeimg_ja_ (>file);'jpeg';'quality';(0>quality){quality,75
+  if. 805> ".}.(i.&'/' {. ])9!:14'' do.
+    dat writeimg_ja_ (>file);'jpeg';'quality';(0>quality){quality,75
+  else.
+    writeimg_ja_ dat;(>file);'jpeg';'quality';(0>quality){quality,75
+  end.
+elseif. USEJNJPEG do.
+  writeimg_jnet_ dat;(>file);'jpeg';'quality';(0>quality){quality,75
 elseif. do.
   (boxopen file) 1!:2~ (quality;subsampling) encodejpeg dat
 end.
@@ -365,6 +375,11 @@ if. USEQTJPEG do.
 elseif. USEJAJPEG do.
   if. 0=# dat=. readimg_ja_ y do.
     'jandroid cannot read JPEG file' return.
+  end.
+  0&setalpha dat return.
+elseif. USEJNJPEG do.
+  if. 0=# dat=. readimg_jnet_ y do.
+    'jnet cannot read JPEG file' return.
   end.
   0&setalpha dat return.
 end.
