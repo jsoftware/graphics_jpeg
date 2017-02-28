@@ -225,7 +225,7 @@ elseif. USEJAJPEG do.
   if. 805> ".}.(i.&'/' {. ])9!:14'' do.
     dat writeimg_ja_ (>file);'jpeg';'quality';(0>quality){quality,75
   else.
-    writeimg_ja_ dat;(>file);'jpeg';'quality';(0>quality){quality,75
+    writeimg_ja_ dat;(>file);'jpeg';(0>quality){quality,75
   end.
 elseif. USEJNJPEG do.
   writeimg_jnet_ dat;(>file);'jpeg';'quality';(0>quality){quality,75
