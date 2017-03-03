@@ -228,7 +228,7 @@ elseif. USEJAJPEG do.
     writeimg_ja_ dat;(>file);'jpeg';(0>quality){quality,75
   end.
 elseif. USEJNJPEG do.
-  writeimg_jnet_ dat;(>file);'jpeg';'quality';(0>quality){quality,75
+  writeimg_jnet_ dat;(>file);'jpeg';(0>quality){quality,75
 elseif. do.
   (boxopen file) 1!:2~ (quality;subsampling) encodejpeg dat
 end.
