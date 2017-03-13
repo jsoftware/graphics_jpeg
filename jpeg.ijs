@@ -5,9 +5,9 @@ IFJNET=: (IFJNET"_)^:(0=4!:0<'IFJNET')0
 if. 0~: 4!:0<'USEQTJPEG' do.
   if. IFQT do.
     USEQTJPEG=: 1
-  elseif. -. IFIOS +. IFJA +. (UNAME-:'Android') +. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) +. ((UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY') do.
-    if. (0 < #1!:0 jpath '~addons/ide/qt/qt.ijs') *. ('"',libjqt,'" dummyfunction + n')&cd :: (2={.@cder) '' do.
-      require '~addons/ide/qt/qt.ijs'
+  elseif. -. IFIOS +. IFJA +. IFJNET +. (UNAME-:'Android') +. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) +. ((UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY') do.
+    if. (0 < #1!:0 jpath '~addons/ide/qt/qtlib.ijs') *. ('"',libjqt,'" dummyfunction + n')&cd :: (2={.@cder) '' do.
+      require 'ide/qt/qtlib'
       USEQTJPEG=: 1
     else.
       USEQTJPEG=: 0
