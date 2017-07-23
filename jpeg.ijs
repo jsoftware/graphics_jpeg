@@ -2,10 +2,11 @@ coclass 'jjpeg'
 
 IFJNET=: (IFJNET"_)^:(0=4!:0<'IFJNET')0
 3 : 0''
+if. (IFJNET +. IFIOS +. UNAME-:'Android') do. USEQTJPEG=: USEPPJPEG=: 0 end.
 if. 0~: 4!:0<'USEQTJPEG' do.
   if. IFQT do.
     USEQTJPEG=: 1
-  elseif. -. IFIOS +. IFJA +. IFJNET +. (UNAME-:'Android') +. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) +. ((UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY') do.
+  elseif. -. ((UNAME-:'Darwin') *. ((0;'') e.~ <2!:5 'QT_PLUGIN_PATH')) +. ((UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY') do.
     if. (0 < #1!:0 jpath '~addons/ide/qt/qtlib.ijs') *. ('"',libjqt,'" dummyfunction + n')&cd :: (2={.@cder) '' do.
       require 'ide/qt/qtlib'
       USEQTJPEG=: 1
@@ -21,6 +22,13 @@ if. 0~: 4!:0<'USEJAJPEG' do.
 end.
 if. 0~: 4!:0<'USEJNJPEG' do.
   USEJNJPEG=: IFJNET
+end.
+if. 0~: 4!:0<'USEPPJPEG' do.
+  USEPPJPEG=: (0 < #1!:0 jpath '~addons/graphics/pplatimg/pplatimg.ijs')
+  require^:USEPPJPEG 'graphics/pplatimg'
+  if. USEPPJPEG *. UNAME-:'Linux' do.
+    USEPPJPEG=: (LIBGDKPIX_pplatimg_,' dummyfunction + n')&cd :: (2={.@cder) ''
+  end.
 end.
 EMPTY
 )
@@ -229,6 +237,8 @@ elseif. USEJAJPEG do.
   end.
 elseif. USEJNJPEG do.
   writeimg_jnet_ dat;(>file);'jpeg';(0>quality){quality,75
+elseif. USEPPJPEG do.
+  dat writeimg_pplatimg_ (>file);(0>quality){quality,75
 elseif. do.
   (boxopen file) 1!:2~ (quality;subsampling) encodejpeg dat
 end.
@@ -380,6 +390,11 @@ elseif. USEJAJPEG do.
 elseif. USEJNJPEG do.
   if. 0=# dat=. readimg_jnet_ y do.
     'jnet cannot read JPEG file' return.
+  end.
+  0&setalpha dat return.
+elseif. USEPPJPEG do.
+  if. 0=# dat=. readimg_pplatimg_ y do.
+    'pplatimg cannot read JPEG file' return.
   end.
   0&setalpha dat return.
 end.
