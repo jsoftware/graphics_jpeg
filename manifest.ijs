@@ -8,7 +8,9 @@ Utilities for *.jpg files
 
 VERSION=: '1.0.19'
 
-RELEASE=: 'j805 j806 j807'
+RELEASE=: 'j805'
+
+FOLDER=: 'graphics/jpeg'
 
 FILES=: 0 : 0
 jpeg.ijs
