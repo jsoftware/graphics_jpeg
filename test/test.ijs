@@ -1,8 +1,9 @@
 
-test=: 3 : 0
+USEQTJPEG_jjpeg_=: USEJAJPEG_jjpeg_=: USEJNJPEG_jjpeg_=: USEPPJPEG_jjpeg_=: 0
 
-USEQTJPEG_jjpeg_=: 0
-USEJAJPEG_jjpeg_=: 0
+load 'graphics/jpeg bmp'     NB. require toucan.bmp for testing
+
+test=: 3 : 0
 
 NB. write
 dat=. 200 300 3 $ 0 0 255
