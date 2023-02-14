@@ -220,10 +220,14 @@ dat=. x
 if. USEQTJPEG do.
   dat writeimg_jqtide_ (>file);'jpeg';'quality';(0>quality){quality,75
 elseif. USEJAJPEG do.
-  if. 805> ".}.(i.&'/' {. ])9!:14'' do.
-    dat writeimg_ja_ (>file);'jpeg';'quality';(0>quality){quality,75
-  else.
+  if. 3=4!:0<'revinfo_j_' do.
     writeimg_ja_ dat;(>file);'jpeg';(0>quality){quality,75
+  else.
+    if. 805> ".}.(i.&'/' {. ])9!:14'' do.
+      dat writeimg_ja_ (>file);'jpeg';'quality';(0>quality){quality,75
+    else.
+      writeimg_ja_ dat;(>file);'jpeg';(0>quality){quality,75
+    end.
   end.
 elseif. USEJNJPEG do.
   writeimg_jnet_ dat;(>file);'jpeg';(0>quality){quality,75
