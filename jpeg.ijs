@@ -15,7 +15,7 @@ end.
 if. (0~: 4!:0<'USEPPJPEG') > IFIOS +. UNAME-:'Android' do.
   USEPPJPEG=: (0 < #1!:0 jpath '~addons/graphics/pplatimg/pplatimg.ijs')
   require^:USEPPJPEG 'graphics/pplatimg'
-  if. USEPPJPEG *. UNAME-:'Linux' do.
+  if. USEPPJPEG *. (<UNAME)e.'Linux';'FreeBSD';'OpenBSD' do.
     USEPPJPEG=: (LIBGDKPIX_pplatimg_,' dummyfunction + n')&cd :: (2={.@cder) ''
   end.
 end.
